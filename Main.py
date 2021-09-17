@@ -6,12 +6,33 @@ pd.set_option('display.max_rows', None)
 
 
 def load_dataset():
+    """
+    load posts dataset
+
+    Returns
+    -------
+    Dataframe
+    """
+
     df_ = pd.read_excel("D:\VERİBİLİMİOKULU\VERİSETLERİ\post_bilgileri.xlsx")
     df = df_.copy()
     return df
 
 
 def data_preprocessing(dataframe):
+    """
+    Edits are made in the date field.
+
+    Parameters
+    ----------
+    dataframe: dataframe
+    dataframe
+
+    Returns
+    -------
+    Dataframe
+    """
+
     dataframe = dataframe.loc[:, 0:]
     dataframe.columns = ["url", "date", "personurl", "name"]
     dataframe["date_new"] = [i.replace("Düzenlendi", "").replace("•", "").strip() for i in dataframe["date"]]
@@ -25,6 +46,19 @@ def data_preprocessing(dataframe):
 
 
 def create_data_structure(dataframe):
+    """
+    data structure is created for rfm
+
+    Parameters
+    ----------
+    dataframe: Dataframe
+    dataframe
+
+    Returns
+    -------
+    Dataframe
+    """
+
     dataframe = dataframe.groupby("name").agg({"date_new": "min",
                                                "url": "count"})
     dataframe.columns = ['recency', 'frequency']
@@ -34,6 +68,19 @@ def create_data_structure(dataframe):
 
 
 def create_rfm_score(dataframe):
+    """
+    rfm scores are generated
+
+    Parameters
+    ----------
+    dataframe: Dataframe
+    dataframe
+
+    Returns
+    -------
+    Dataframe
+    """
+
     dataframe["recency_score"] = pd.qcut(dataframe['recency'].rank(method="first"), 5, labels=[5, 4, 3, 2, 1])
     dataframe["frequency_score"] = pd.cut(dataframe['frequency'], bins=[0, 4, 8, 13, 17, 20], labels=[1, 2, 3, 4, 5])
     dataframe["RFM_SCORE"] = (dataframe['recency_score'].astype(str) +
@@ -43,6 +90,19 @@ def create_rfm_score(dataframe):
 
 
 def create_segment(dataframe):
+    """
+    create segments
+
+    Parameters
+    ----------
+    dataframe: Dataframe
+    Dataframe
+
+    Returns
+    -------
+    Dataframe
+    """
+
     seg_map = {
         r'[1-2][1-2]': 'hibernating',
         r'[1-2][3-4]': 'at_Risk',
