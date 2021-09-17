@@ -1,5 +1,7 @@
+# import Main.py
 from LinkedinProfileAnalysisWithRFM import Main
 
+# We read data by preprocessing
 df_ = Main.load_dataset()
 df_preprocessing = Main.data_preprocessing(df_)
 df_structure = Main.create_data_structure(df_preprocessing)
@@ -8,6 +10,24 @@ df_segment = Main.create_segment(df_rfmscore)
 
 
 def check_df_first(dataframe, head=5, tail=5):
+    """
+    Shows dataframe summary information
+
+    Parameters
+    ----------
+    dataframe: dataframe
+    dataframe
+
+    head: int, optional
+    number of first row to be displayed
+
+    tail: int, optional
+    number of last row to be displayed
+
+    Returns
+    -------
+    None
+    """
     print(f"Head = {dataframe.head(head)}")
     print("###########################")
     print(f"Tail = {dataframe.tail(tail)}")
@@ -39,6 +59,18 @@ df_preprocessing.isnull().sum()
 
 # Q4- check df structure
 def check_structure_df(dataframe):
+    """
+    Shows dataframe summary information
+
+    Parameters
+    ----------
+    dataframe: dataframe
+    dataframe
+
+    Returns
+    -------
+    None
+    """
     print(f"frequency unique number = {dataframe['frequency'].unique()}")
     print(f"frequency max = {dataframe['frequency'].max()}")
     print(f"frequency describe = {dataframe['frequency'].describe().T}")
