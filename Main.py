@@ -62,7 +62,6 @@ def create_segment(dataframe):
 
 
 df_ = load_dataset()
-df_.head()
 df_preprocessing = data_preprocessing(df_)
 df_structure = create_data_structure(df_preprocessing)
 df_rfmscore = create_rfm_score(df_structure)
