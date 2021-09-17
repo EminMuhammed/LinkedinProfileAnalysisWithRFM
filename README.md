@@ -6,3 +6,7 @@ Linkedin paylaşımlarımı beğenen kullanıcıları rfm analizi yaparak incele
 * Veri ön işleme 
 * RFM analizi
 * Segmentasyon uygulaması
+
+#----------------------
+## Not
+* Kişilerin bilgileri bulunduğundan dolayı veri setini paylaşamadım.
